@@ -1,0 +1,64 @@
+Report for linux environment verification. 
+
+1. Username and Groups
+
+Command:
+id
+
+Output:
+uid=1000(codespace)gid=1000(codespace)groups=1000(codespace),985(pipx),986(python),987(oryx),988(golang),989(docker),990(sdkman),991(rvm),992(php),993(conda),994(nvs),995(nvm),996(hugo),1001(ssh)
+
+Observation:
+The id command displays the current user ID, group ID, and all the groups associated with the account. It confirms that I am logged in as the "codespace" user and have access to multiple development-related groups.
+
+2. Current Shell being used
+
+Command:
+echo $SHELL
+
+Output:
+/bin/bash
+
+Observation:
+The current shell is Bash (/bin/bash). Bash is the command-line interpreter that executes Linux commands and is the default shell in this environment.
+
+3. Current Working Directory
+
+Command:
+pwd
+
+Output:
+/workspaces/cli-assignment
+
+Observation:
+The pwd command shows the current working directory. It confirms that I am working inside the "cli-assignment" project folder.
+
+4. List of Files and Directories in the workspace
+
+Command:
+ls -la
+
+Output:
+total 16
+drwxrwxrwx+ 3 codespace root 4096 Jun 28 12:03 .
+drwxr-xrwx+ 5 codespace root 4096 Jun 28 12:03 ..
+drwxrwxrwx+ 8 codespace root 4096 Jun 28 12:04 .git
+-rw-rw-rw- 1 codespace root   16 Jun 28 12:03 README.md
+
+Observation:
+The ls -la command lists all files and directories, including hidden files. The workspace currently contains the Git repository (.git) and the README.md file.
+
+5. Network Connectivity Verification
+
+Command:
+ping -c 4 google.com
+
+Output:
+PING google.com (192.178.173.101) 56(84) bytes of data.
+
+--- google.com ping statistics ---
+4 packets transmitted, 0 received, 100% packet loss, time 3056ms
+
+Observation:
+The ping command was executed successfully. Although all packets were transmitted, no replies were received because ICMP requests are restricted in the GitHub Codespaces environment. This does not necessarily indicate that internet connectivity is unavailable.
+
