@@ -9,7 +9,9 @@ Output:
 uid=1000(codespace)gid=1000(codespace)groups=1000(codespace),985(pipx),986(python),987(oryx),988(golang),989(docker),990(sdkman),991(rvm),992(php),993(conda),994(nvs),995(nvm),996(hugo),1001(ssh)
 
 Observation:
-The id command displays the current user ID, group ID, and all the groups associated with the account. It confirms that I am logged in as the "codespace" user and have access to multiple development-related groups.
+The id command displays the current user's UID, GID, and all the groups associated with the account. 
+It helps verify the identity of the logged-in user. The output also shows the permissions and groups the user belongs to. 
+This information is useful for checking user access in Linux.
 
 2. Current Shell being used
 
@@ -20,7 +22,8 @@ Output:
 /bin/bash
 
 Observation:
-The current shell is Bash (/bin/bash). Bash is the command-line interpreter that executes Linux commands and is the default shell in this environment.
+The echo $SHELL command displays the default shell currently being used. The output shows /bin/bash, indicating that Bash is the active shell.
+ Bash is the default command-line interpreter on many Linux systems. It is responsible for executing commands entered by the user.
 
 3. Current Working Directory
 
@@ -31,7 +34,10 @@ Output:
 /workspaces/cli-assignment
 
 Observation:
-The pwd command shows the current working directory. It confirms that I am working inside the "cli-assignment" project folder.
+The pwd command prints the absolute path of the current working directory. 
+It helps identify the exact location where commands are being executed. 
+This is useful when working with multiple folders and files.
+The output confirms that the work is being done inside the cli-assignment directory.
 
 4. List of Files and Directories in the workspace
 
@@ -46,7 +52,10 @@ drwxrwxrwx+ 8 codespace root 4096 Jun 28 12:04 .git
 -rw-rw-rw- 1 codespace root   16 Jun 28 12:03 README.md
 
 Observation:
-The ls -la command lists all files and directories, including hidden files. The workspace currently contains the Git repository (.git) and the README.md file.
+The ls -la command lists all files and directories, including hidden files.
+It also displays file permissions, ownership, size, and modification dates. 
+Hidden files such as .git are important for Git version control.
+This command helps verify the contents of the current workspace.
 
 5. Network Connectivity Verification
 
@@ -60,5 +69,8 @@ PING google.com (192.178.173.101) 56(84) bytes of data.
 4 packets transmitted, 0 received, 100% packet loss, time 3056ms
 
 Observation:
-The ping command was executed successfully. Although all packets were transmitted, no replies were received because ICMP requests are restricted in the GitHub Codespaces environment. This does not necessarily indicate that internet connectivity is unavailable.
+The ping command is used to test network connectivity with another system. 
+In this case, four packets were transmitted but no replies were received. 
+This happened because GitHub Codespaces restricts ICMP responses used by ping. 
+Despite the packet loss, internet connectivity was available, as software packages could still be installed successfully.
 
