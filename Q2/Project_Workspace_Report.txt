@@ -1,0 +1,103 @@
+1. Directory Structure Created
+
+Command:
+
+mkdir -p ProjectWorkspace/Documents
+mkdir ProjectWorkspace/ProjectFiles
+cd ProjectWorkspace
+touch Project_Workspace_Report.txt
+ls -R
+
+Output:
+
+.:
+Documents  ProjectFiles  Project_Workspace_Report.txt
+
+./Documents:
+
+./ProjectFiles:
+
+Observation:
+The ProjectWorkspace directory was successfully created with the Documents and ProjectFiles subdirectories and the Project_Workspace_Report.txt file.
+ The ls -R command confirms the required directory structure.
+
+
+2. File Permissions Before Modification
+
+Command:
+
+ls -l
+
+Output:
+
+total 8
+drwxrwxrwx+ 2 codespace codespace 4096 Jun 28 17:32 Documents
+drwxrwxrwx+ 2 codespace codespace 4096 Jun 28 17:32 ProjectFiles
+-rw-rw-rw- 1 codespace codespace    0 Jun 28 17:32 Project_Workspace_Report.txt
+
+Observation:
+Before modifying permissions, both directories had drwxrwxrwx+ (read, write, and execute permissions for everyone), 
+and the report file had -rw-rw-rw- (read and write permissions for everyone). 
+These permissions were too permissive for a secure project workspace.
+
+3. Ownership Details
+
+Command:
+
+ls -ld . Documents ProjectFiles
+
+Output:
+
+drwxrwxrwx+ 4 codespace codespace 4096 Jun 28 17:32 .
+drwxrwxrwx+ 2 codespace codespace 4096 Jun 28 17:32 Documents
+drwxrwxrwx+ 2 codespace codespace 4096 Jun 28 17:32 ProjectFiles
+
+Observation:
+The current directory (.), Documents, and ProjectFiles are all owned by the user codespace and the group codespace. 
+This confirms that the workspace and its subdirectories belong to the current user and are managed under the same group.
+
+4. Umask Value Used
+
+Command:
+
+umask
+
+Output:
+
+0022
+
+Observation:
+The current umask value is 0022. This means newly created files do not receive write permission for the group and others by default, 
+while directories are created without write permission for the group and others.
+This helps prevent unauthorized modification of newly created files and directories.
+
+5. File Permissions After Modification
+
+Command:
+
+chmod 700 Documents
+chmod 750 ProjectFiles
+chmod 600 Project_Workspace_Report.txt
+ls -l
+ls -ld Documents ProjectFiles
+
+Output:
+
+total 8
+drwx------+ 2 codespace codespace 4096 Jun 28 17:32 Documents
+drwxr-x---+ 2 codespace codespace 4096 Jun 28 17:32 ProjectFiles
+-rw------- 1 codespace codespace    0 Jun 28 17:32 Project_Workspace_Report.txt
+
+drwx------+ 2 codespace codespace 4096 Jun 28 17:32 Documents
+drwxr-x---+ 2 codespace codespace 4096 Jun 28 17:32 ProjectFiles
+
+Observation:
+The permissions were successfully updated. The Documents directory (700) is accessible only by the owner, the ProjectFiles directory (750) allows the owner full access while permitting the group to read and execute, and the Project_Workspace_Report.txt file (600) is readable and writable only by the owner. These settings provide improved protection for the project data.
+
+6.  How Permissions Protect Project Data
+
+Project files are often intended to be accessed only by authorized users or specific groups. 
+If unauthorized users are able to read, modify, or delete these files, it can lead to data leaks, accidental changes, 
+or loss of important information. By assigning appropriate file and directory permissions, 
+access is restricted to authorized users only. This helps protect the confidentiality and integrity of project data, 
+prevents unauthorized modifications, and ensures that sensitive information remains secure.
