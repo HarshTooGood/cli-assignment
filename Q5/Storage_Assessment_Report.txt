@@ -1,4 +1,6 @@
-Command:
+Storage Health Assessment and Documentation report: 
+
+1. Command:
 $ lsblk
 
 Output:
@@ -30,9 +32,11 @@ sr0      11:0    1 628K   0 rom
 
 Observation:
 
-The lsblk command displayed all available storage devices and their partitions. The system contains three primary storage devices (sda, sdb, and sdc) along with several loop devices used by the Codespaces environment. The primary storage devices are detected successfully and are available for use.
+The lsblk command displayed all available storage devices and their partitions. 
+The system contains three primary storage devices (sda, sdb, and sdc) along with several loop devices used by the Codespaces environment. 
+The primary storage devices are detected successfully and are available for use.
 
-Command:
+2. Command:
 $ df -h
 
 Output:
@@ -46,9 +50,11 @@ shm              64M     0   64M   0% /dev/shm
 
 Observation:
 
-The df -h command displayed the mounted file systems and their disk usage. The /vscode mount point has the highest storage utilization at 81%, while the root filesystem (/) uses 33% of its capacity. The /tmp filesystem has only 7% usage, indicating that sufficient storage space is available across the system.
+The df -h command displayed the mounted file systems and their disk usage. 
+The /vscode mount point has the highest storage utilization at 81%, while the root filesystem (/) uses 33% of its capacity.
+ The /tmp filesystem has only 7% usage, indicating that sufficient storage space is available across the system.
 
-Command:
+3. Command:
 $ df -i
 
 Output:
@@ -62,9 +68,11 @@ shm            1016900      1 1016899    1% /dev/shm
 
 Observation:
 
-The df -i command displayed inode utilization for each mounted file system. The highest inode usage is 10% on the root filesystem and /workspaces, while /vscode uses 7% and /tmp uses only 1%. This indicates that sufficient inodes are available and there is no risk of inode exhaustion.
+The df -i command displayed inode utilization for each mounted file system.
+The highest inode usage is 10% on the root filesystem and /workspaces, while /vscode uses 7% and /tmp uses only 1%.
+This indicates that sufficient inodes are available and there is no risk of inode exhaustion.
 
-Storage Health Observations
+4. Storage Health Observations
 
 The system detected all storage devices successfully.
 All required file systems are mounted and accessible.
@@ -72,9 +80,13 @@ Disk space is sufficient for deploying a new application server.
 Inode usage is very low, so there is no shortage of available inodes.
 Based on the collected information, the storage resources appear to be in good condition.
 
-Recommendations
+5. Recommendations
 
-Disk usage should be monitored regularly to avoid running out of storage space. Unnecessary and temporary files should be removed periodically to free disk space. Old log files should be archived or deleted when they are no longer needed. Inode usage should also be monitored to prevent future storage issues. Regular storage maintenance is recommended to keep the system performing efficiently.
+Disk usage should be monitored regularly to avoid running out of storage space. 
+Unnecessary and temporary files should be removed periodically to free disk space. 
+Old log files should be archived or deleted when they are no longer needed. 
+Inode usage should also be monitored to prevent future storage issues. 
+Regular storage maintenance is recommended to keep the system performing efficiently.
 
 
 
