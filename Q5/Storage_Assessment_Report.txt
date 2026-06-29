@@ -1,0 +1,81 @@
+Command:
+$ lsblk
+
+Output:
+NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+loop0     7:0    0 63.8M  1 loop
+loop1     7:1    0 91.7M  1 loop
+loop2     7:2    0 49.3M  1 loop
+loop3     7:3    0 257G   0 loop
+loop4     7:4    0 32G    0 loop /workspaces/.codespaces/.persistedshare
+                                 /var/lib/docker
+                                 /home/vscode/.minikube
+                                 /etc/hosts
+                                 /etc/hostname
+                                 /etc/resolv.conf
+                                 /workspaces
+loop5     7:5    0 500M   0 loop
+sda       8:0    0 30G    0 disk
+├─sda1    8:1    0 29.9G  0 part /workspaces/.codespaces/shared
+│                                /.codespaces/bin
+│                                /vscode
+│                                /usr/sbin/docker-init
+├─sda14   8:14   0 4M     0 part
+└─sda15   8:15   0 106M   0 part
+sdb       8:16   0 45G    0 disk
+└─sdb1    8:17   0 45G    0 part /tmp
+sdc       8:32   0 512G   0 disk
+└─sdc1    8:33   0 512G   0 part
+sr0      11:0    1 628K   0 rom
+
+Observation:
+
+The lsblk command displayed all available storage devices and their partitions. The system contains three primary storage devices (sda, sdb, and sdc) along with several loop devices used by the Codespaces environment. The primary storage devices are detected successfully and are available for use.
+
+Command:
+$ df -h
+
+Output:
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          32G  9.7G   21G  33% /
+tmpfs            64M     0   64M   0% /dev
+shm              64M     0   64M   0% /dev/shm
+/dev/root        29G   24G  5.6G  81% /vscode
+/dev/sdb1        44G  2.7G   40G   7% /tmp
+/dev/loop4       32G  9.7G   21G  33% /workspaces
+
+Observation:
+
+The df -h command displayed the mounted file systems and their disk usage. The /vscode mount point has the highest storage utilization at 81%, while the root filesystem (/) uses 33% of its capacity. The /tmp filesystem has only 7% usage, indicating that sufficient storage space is available across the system.
+
+Command:
+$ df -i
+
+Output:
+Filesystem      Inodes  IUsed   IFree IUse% Mounted on
+overlay        2097152 203303 1893849   10% /
+tmpfs          1016900    213 1016687    1% /dev
+shm            1016900      1 1016899    1% /dev/shm
+/dev/root      3870720 243465 3627255    7% /vscode
+/dev/sdb1      2949120     33 2949087    1% /tmp
+/dev/loop4     2097152 203303 1893849   10% /workspaces
+
+Observation:
+
+The df -i command displayed inode utilization for each mounted file system. The highest inode usage is 10% on the root filesystem and /workspaces, while /vscode uses 7% and /tmp uses only 1%. This indicates that sufficient inodes are available and there is no risk of inode exhaustion.
+
+Storage Health Observations
+
+The system detected all storage devices successfully.
+All required file systems are mounted and accessible.
+Disk space is sufficient for deploying a new application server.
+Inode usage is very low, so there is no shortage of available inodes.
+Based on the collected information, the storage resources appear to be in good condition.
+
+Recommendations
+
+Disk usage should be monitored regularly to avoid running out of storage space. Unnecessary and temporary files should be removed periodically to free disk space. Old log files should be archived or deleted when they are no longer needed. Inode usage should also be monitored to prevent future storage issues. Regular storage maintenance is recommended to keep the system performing efficiently.
+
+
+
+

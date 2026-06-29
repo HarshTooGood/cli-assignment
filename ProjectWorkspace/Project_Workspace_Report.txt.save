@@ -1,0 +1,14 @@
+Directory Structure Created
+
+The following directory structure was created for the project workspace:
+
+ProjectWorkspace/
+├── Documents/
+├── ProjectFiles/
+└── Project_Workspace_Report.txt
+Observation:
+
+Documents directory was created to store project documentation.
+ProjectFiles directory was created to store project files.
+Project_Workspace_Report.txt was created to document the workspace setup.
+
