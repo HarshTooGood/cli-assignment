@@ -18,7 +18,7 @@ loop4     7:4    0 32G    0 loop /workspaces/.codespaces/.persistedshare
                                  /workspaces
 loop5     7:5    0 500M   0 loop
 sda       8:0    0 30G    0 disk
-├─sda1    8:1    0 29.9G  0 part /workspaces/.codespaces/shared
+├─sda1    8:1    0 29.9G  0 part /workspaces/.code  spaces/shared
 │                                /.codespaces/bin
 │                                /vscode
 │                                /usr/sbin/docker-init
