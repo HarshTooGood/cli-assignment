@@ -1,0 +1,115 @@
+Link Analysis Report
+1. Create the Working Directory
+
+Command:
+
+$ mkdir LinkAnalysis
+$ cd LinkAnalysis
+$ pwd
+
+Output:
+
+/workspaces/cli-assignment/LinkAnalysis
+
+Observation: The LinkAnalysis directory was created successfully, and the current working directory was changed to the new folder.
+
+2. Create the Original File
+
+Command:
+
+$ touch original.txt
+$ echo "The original file." > original.txt
+$ cat original.txt
+
+Output:
+
+The original file.
+
+Observation: The file original.txt was created successfully, and the content was written and verified using the cat command.
+
+3. Create Hard Link and Symbolic Link
+
+Command:
+
+$ ln original.txt hardlink.txt
+$ ln -s original.txt symlink.txt
+$ ls -l
+
+Output:
+
+total 8
+-rw-rw-rw- 2 codespace codespace 19 Jun 30 11:56 hardlink.txt
+-rw-rw-rw- 2 codespace codespace 19 Jun 30 11:56 original.txt
+lrwxrwxrwx 1 codespace codespace 12 Jun 30 11:57 symlink.txt -> original.txt
+
+Observation: The hard link (hardlink.txt) and symbolic link (symlink.txt) were created successfully.
+The symbolic link correctly points to original.txt, as indicated by -> original.txt in the ls -l output.
+
+4. Display Inode Numbers
+
+Command:
+
+$ ls -li
+
+Output:
+
+total 8
+1310925 -rw-rw-rw- 2 codespace codespace 19 Jun 30 11:56 hardlink.txt
+1310925 -rw-rw-rw- 2 codespace codespace 19 Jun 30 11:56 original.txt
+1310932 lrwxrwxrwx 1 codespace codespace 12 Jun 30 11:57 symlink.txt -> original.txt
+
+Observation:
+
+original.txt and hardlink.txt have the same inode number (1310925).
+symlink.txt has a different inode number (1310932).
+
+5. Collect Metadata
+
+Command:
+
+$ stat original.txt
+$ stat hardlink.txt
+$ stat symlink.txt
+
+Observation:
+
+original.txt and hardlink.txt have the same inode number and link count.
+symlink.txt has its own inode and points to original.txt.
+
+6. Delete the Original File
+
+Command:
+
+$ rm original.txt
+$ ls -li
+$ cat hardlink.txt
+$ cat symlink.txt
+
+Output:
+
+total 4
+1310925 -rw-rw-rw- 1 codespace codespace 19 Jun 30 11:56 hardlink.txt
+1310932 lrwxrwxrwx 1 codespace codespace 12 Jun 30 11:57 symlink.txt -> original.txt
+
+The original file.
+
+cat: symlink.txt: No such file or directory
+
+Observation:
+
+The hard link continues to access the file contents.
+The symbolic link becomes a broken link because the original file has been deleted.
+
+7. Comparison Between Hard Link and Symbolic Link
+
+Hard Link	
+Shares the same inode as the original file.	
+Directly references the file data.	
+Continues to work after the original file is deleted.	
+Link count increases when created.
+
+Symbolic Link
+Has a different inode.
+References the file path.
+Becomes a broken link if the original file is deleted.
+Does not affect the original file's link count.
