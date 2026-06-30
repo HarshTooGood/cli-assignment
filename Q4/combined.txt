@@ -1,0 +1,2 @@
+sample.txt
+ls: cannot access 'nonexistentfile': No such file or directory
